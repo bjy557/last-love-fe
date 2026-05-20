@@ -153,19 +153,12 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
               children: [
                 PrimaryButton(
                   label: '대화 시작하기',
-                  onPressed: () {
-                    // Chat round will land in a later round - placeholder.
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('대화 기능은 곧 시작돼요.'),
-                        behavior: SnackBarBehavior.floating,
-                      ),
-                    );
-                  },
+                  onPressed: () =>
+                      context.go('/chat/${widget.match.id}'),
                 ),
                 const SizedBox(height: AppSpacing.m),
                 OutlinedButton(
-                  onPressed: () => Navigator.of(context).maybePop(),
+                  onPressed: () => context.go('/matches'),
                   child: const Text('잠시 후에 인사할게요'),
                 ),
               ],

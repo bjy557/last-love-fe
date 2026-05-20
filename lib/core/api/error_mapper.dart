@@ -33,6 +33,20 @@ class ErrorMessages {
     'PHOTO_LIMIT_EXCEEDED': '사진은 최대 6장까지 올릴 수 있어요.',
     'PHOTO_NOT_UPLOADED': '사진을 다시 보내드릴게요.',
     'PHOTO_REVIEW_REJECTED': '이 사진은 가이드라인에 맞지 않아요. 다른 사진을 골라 주세요.',
+    // Chat
+    'CHAT_ROOM_NOT_FOUND': '대화방을 찾을 수 없어요.',
+    'CHAT_ROOM_ACCESS_DENIED': '이 대화방에 접근할 수 없어요.',
+    'CHAT_ROOM_ENDED': '종료된 대화예요.',
+    'MESSAGE_TOO_LONG': '메시지가 너무 길어요 (최대 1000자).',
+    'MESSAGE_EMPTY': '메시지를 입력해 주세요.',
+    'MESSAGE_DUPLICATE': '이미 보낸 메시지예요.',
+    // Safety
+    'REPORT_ALREADY_FILED': '이미 신고하신 분이에요.',
+    'BLOCK_ALREADY_EXISTS': '이미 차단한 분이에요.',
+    'BLOCK_NOT_FOUND': '차단 기록을 찾을 수 없어요.',
+    // WebSocket
+    'WS_AUTH_FAILED': '연결이 끊겼어요. 다시 로그인해 주세요.',
+    'WS_INVALID_DESTINATION': '잘못된 대화방이에요.',
     // Generic
     'INTERNAL_ERROR': '일시적인 문제가 생겼어요. 잠시 후 다시 시도해 주세요.',
     'NETWORK_ERROR': '연결이 잘 안 돼요. 잠시 후 다시 시도해 주세요.',

@@ -116,15 +116,7 @@ class _MatchListScreenState extends ConsumerState<MatchListScreen> {
                     final match = state.items[i];
                     return MatchTile(
                       match: match,
-                      onTap: () {
-                        // Chat round will replace with /chat/{matchId}.
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('대화 기능은 곧 시작돼요.'),
-                            behavior: SnackBarBehavior.floating,
-                          ),
-                        );
-                      },
+                      onTap: () => context.push('/chat/${match.id}'),
                       onMenu: () => _showMenu(context, controller, match),
                     );
                   },

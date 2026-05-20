@@ -4,6 +4,8 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../domain/match_models.dart';
 
+const String _emptyPreviewLabel = '아직 첫 인사가 없어요';
+
 /// One cell in the match grid. Photo on top, name+age below, ••• menu in
 /// the corner.
 class MatchTile extends StatelessWidget {
@@ -68,15 +70,36 @@ class MatchTile extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 6),
-            Text(
-              partner.displayName,
-              style: AppTextStyles.body.copyWith(fontSize: 16),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            Row(
+              children: [
+                Flexible(
+                  child: Text(
+                    partner.displayName,
+                    style: AppTextStyles.body.copyWith(fontSize: 16),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                if (match.unreadCount > 0) ...[
+                  const SizedBox(width: 6),
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: const BoxDecoration(
+                      color: AppColors.primary,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ],
+              ],
             ),
             Text(
-              '${partner.age}',
-              style: AppTextStyles.captionMuted,
+              match.lastMessagePreview ?? _emptyPreviewLabel,
+              style: match.lastMessagePreview == null
+                  ? AppTextStyles.captionMuted
+                  : AppTextStyles.caption.copyWith(fontSize: 14),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

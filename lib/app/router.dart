@@ -11,12 +11,15 @@ import '../features/auth/presentation/phone_input_screen.dart';
 import '../features/auth/presentation/signup_form_screen.dart';
 import '../features/auth/presentation/splash_screen.dart';
 import '../features/auth/presentation/welcome_screen.dart';
+import '../features/chat/presentation/chat_screen.dart';
 import '../features/location/presentation/location_permission_screen.dart';
 import '../features/matches/presentation/match_list_screen.dart';
 import '../features/matches/presentation/new_match_screen.dart';
 import '../features/photo/presentation/photo_upload_screen.dart';
 import '../features/profile_setup/presentation/profile_setup_intro_screen.dart';
 import '../features/profile_setup/presentation/profile_setup_step1_screen.dart';
+import '../features/safety/presentation/block_list_screen.dart';
+import '../features/safety/presentation/report_reason_screen.dart';
 import '../features/swipe/presentation/card_detail_screen.dart';
 import '../features/swipe/presentation/deck_screen.dart';
 import '../features/swipe/presentation/preferences_screen.dart';
@@ -126,6 +129,19 @@ GoRouter buildAppRouter(Ref ref) {
         path: '/preferences',
         builder: (_, _) => const PreferencesScreen(),
       ),
+      GoRoute(
+        path: '/chat/:matchId',
+        builder: (_, state) => ChatScreen(
+          matchId: int.parse(state.pathParameters['matchId']!),
+        ),
+      ),
+      GoRoute(
+        path: '/chat/:matchId/report',
+        builder: (_, state) => ReportReasonScreen(
+          matchId: int.parse(state.pathParameters['matchId']!),
+        ),
+      ),
+      GoRoute(path: '/blocks', builder: (_, _) => const BlockListScreen()),
     ],
   );
 }
