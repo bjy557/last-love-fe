@@ -11,11 +11,15 @@ import '../features/auth/presentation/phone_input_screen.dart';
 import '../features/auth/presentation/signup_form_screen.dart';
 import '../features/auth/presentation/splash_screen.dart';
 import '../features/auth/presentation/welcome_screen.dart';
-import '../features/home/presentation/home_screen.dart';
 import '../features/location/presentation/location_permission_screen.dart';
+import '../features/matches/presentation/match_list_screen.dart';
+import '../features/matches/presentation/new_match_screen.dart';
 import '../features/photo/presentation/photo_upload_screen.dart';
 import '../features/profile_setup/presentation/profile_setup_intro_screen.dart';
 import '../features/profile_setup/presentation/profile_setup_step1_screen.dart';
+import '../features/swipe/presentation/card_detail_screen.dart';
+import '../features/swipe/presentation/deck_screen.dart';
+import '../features/swipe/presentation/preferences_screen.dart';
 
 const _guestRoutes = <String>{
   '/splash',
@@ -64,13 +68,16 @@ GoRouter buildAppRouter(Ref ref) {
           location == '/phone' ||
           location == '/otp' ||
           location == '/signup') {
-        return auth.profileReady ? '/home' : '/profile-setup/intro';
+        return auth.profileReady ? '/swipe' : '/profile-setup/intro';
       }
-      if (!auth.profileReady && location == '/home') {
+      if (location == '/home') {
+        return auth.profileReady ? '/swipe' : '/profile-setup/intro';
+      }
+      if (!auth.profileReady && location.startsWith('/swipe')) {
         return '/profile-setup/intro';
       }
       if (auth.profileReady && isSetup) {
-        return '/home';
+        return '/swipe';
       }
       return null;
     },
@@ -101,7 +108,24 @@ GoRouter buildAppRouter(Ref ref) {
         path: '/profile-setup/location',
         builder: (_, _) => const LocationPermissionScreen(),
       ),
-      GoRoute(path: '/home', builder: (_, _) => const HomeScreen()),
+      GoRoute(path: '/swipe', builder: (_, _) => const DeckScreen()),
+      GoRoute(
+        path: '/swipe/card/:userId',
+        builder: (_, state) => CardDetailScreen(
+          userId: int.parse(state.pathParameters['userId']!),
+        ),
+      ),
+      GoRoute(
+        path: '/match/new/:matchId',
+        builder: (_, state) => NewMatchScreen(
+          matchId: int.parse(state.pathParameters['matchId']!),
+        ),
+      ),
+      GoRoute(path: '/matches', builder: (_, _) => const MatchListScreen()),
+      GoRoute(
+        path: '/preferences',
+        builder: (_, _) => const PreferencesScreen(),
+      ),
     ],
   );
 }
